@@ -79,10 +79,13 @@ class KaryawanController extends Controller
      * @param  \App\Models\karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, karyawan $karyawan)
+    public function update(Request $request, karyawan $karyawan,$id)
     {
         $karyawan->where('idkaryawan',$id)->update($request->all());
-        
+        return response()->json([
+            'message'=>'data berhasil diubah',
+            'data'=>$request->all()
+        ],200);
     }
 
     /**
