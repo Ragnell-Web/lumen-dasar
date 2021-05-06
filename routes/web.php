@@ -24,4 +24,6 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
     $router->get('karyawan/{id}',['uses'=>'KaryawanController@show']);
     $router->delete('karyawan/{id}',['uses'=>'KaryawanController@destroy']);
     $router->put('karyawan/{id}',['uses'=>'KaryawanController@update']);
+    $router->get('/entryssolist', 'EntrySsoController@index');
+    $router->get('customerinvoicelist','AccCustomerController@index');
 });
