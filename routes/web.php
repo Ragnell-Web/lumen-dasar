@@ -26,4 +26,5 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
     $router->put('karyawan/{id}',['uses'=>'KaryawanController@update']);
     $router->get('/entryssolist', 'EntrySsoController@index');
     $router->get('customerinvoicelist','AccCustomerController@index');
+    $router->post('customerinvoiceadd','AccCustomerController@create');
 });
