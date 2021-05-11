@@ -54,10 +54,10 @@ class AccCustomerInvoiceController extends Controller
 
                 $data = DB::select("
                     SELECT customer.id, aci.invoice, aci.inv_type, aci.ref_no, customer.company, customer.contact, customer.do_addr1, customer.do_addr2
-                FROM customer
-                INNER JOIN acc_customer_invoice AS aci
-                ON customer.id = aci.id
-                GROUP BY invoice");
+                    FROM customer
+                    INNER JOIN acc_customer_invoice AS aci
+                    ON customer.id = aci.id
+                    GROUP BY invoice");
 
                 // $data = DB::table('customer')
                 // ->join('acc_customer_invoice', 'customer.id', '=', 'acc_customer_invoice.id')

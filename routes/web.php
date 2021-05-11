@@ -27,7 +27,7 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
 
    $router->get('customerlist','CustomerListController@index');
 
-   $router->get('detailcustomereedit','DetailCustomerController@show');
+   $router->get('detailcustomeredit','DetailCustomerController@show');
 
    $router->get('datasuratjalanlist','DataSuratJalanController@index');
 
