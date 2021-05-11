@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AccCustomerInvoice;
+use App\Models\CustomerList;
+use DB;
 
 class AccCustomerInvoiceController extends Controller
 {
@@ -31,9 +33,57 @@ class AccCustomerInvoiceController extends Controller
                     return $response;
                 }
                 
-                $data = AccCustomerInvoice::limit(100)->get();
+                // $data = AccCustomerInvoice::all();
+
+                // $data = DB::table('customer')
+                // ->join('acc_customer_invoice', 'customer.id', '=', 'acc_customer_invoice.id')
+                // ->select(
+                //     'customer.id',
+                //     'acc_customer_invoice.invoice', 
+                //     'acc_customer_invoice.inv_type', 
+                //     'acc_customer_invoice.ref_no', 
+                //     'acc_customer_invoice.period',  
+                //     'customer.company',
+                //     'customer.contact',
+                //     'customer.do_addr1',
+                //     'customer.do_addr2'
+                // )
+                // ->orderBy('invoice')
+                // ->limit(100)
+                // ->get();
+
+                $data = DB::select("
+                    SELECT customer.id, aci.invoice, aci.inv_type, aci.ref_no, customer.company, customer.contact, customer.do_addr1, customer.do_addr2
+                FROM customer
+                INNER JOIN acc_customer_invoice AS aci
+                ON customer.id = aci.id
+                GROUP BY invoice");
+
+                // $data = DB::table('customer')
+                // ->join('acc_customer_invoice', 'customer.id', '=', 'acc_customer_invoice.id')
+                // ->select(
+                //     'customer.id',
+                //     'acc_customer_invoice.invoice', 
+                //     'acc_customer_invoice.inv_type', 
+                //     'acc_customer_invoice.ref_no', 
+                //     'acc_customer_invoice.period',  
+                //     'customer.company',
+                //     'customer.contact',
+                //     'customer.do_addr1',
+                //     'customer.do_addr2'
+                // )
+                // ->groupBy('acc_customer_invoice.id')
+                // ->get();
+
+                // $data = DB::table('customer')
+                // ->join('acc_customer_invoice', 'acc_customer_invoice.id', '=', 'customer.id')
+                // ->select('acc_customer_invoice.invoice')
+                // ->groupBy('acc_customer_invoice.invoice')
+                // ->get();
+
                 //return response()->json($data);
                 $response = array("error" => false, "errmsg" => "Data Ditampilkan", "code" => 200, "data" => $data );
+
                 return $response;
         } catch(\Illuminate\Database\QueryException $ex) { 
             //dd($ex->getMessage()); 
