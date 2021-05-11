@@ -19,12 +19,16 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix'=>'api/v1'],function () use ($router)
 {
-    $router->get('karyawan',['uses'=>'KaryawanController@index']);
-    $router->post('karyawan',['uses'=>'KaryawanController@create']);
-    $router->get('karyawan/{id}',['uses'=>'KaryawanController@show']);
-    $router->delete('karyawan/{id}',['uses'=>'KaryawanController@destroy']);
-    $router->put('karyawan/{id}',['uses'=>'KaryawanController@update']);
-    $router->get('/entryssolist', 'EntrySsoController@index');
-    $router->get('customerinvoicelist','AccCustomerController@index');
-    $router->post('customerinvoiceadd','AccCustomerController@create');
+   $router->get('acccustomerinvoicelist','AccCustomerInvoiceController@index');
+   $router->post('acccustomerinvoicestore','AccCustomerInvoiceController@create');
+   $router->get('acccustomerinvoiceedit','AccCustomerInvoiceController@show');
+   $router->put('acccustomerinvoiceupdate','AccCustomerInvoiceController@update');
+   $router->delete('acccustomerinvoicedelete','AccCustomerInvoiceController@destroy');
+
+   $router->get('customerlist','CustomerListController@index');
+
+   $router->get('datasuratjalanlist','DataSuratJalanController@index');
+
+
+
 });
