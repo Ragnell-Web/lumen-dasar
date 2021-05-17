@@ -19,11 +19,12 @@ class AccCustomerController extends Controller
         $value = env('APP_KEY', true);
         $this->appkey = str_replace('base64:', '', $value);
     }
+
     public function index(Request $request)
     {
         try { 
             $header = $request->header('Authorization');
-            if ($header == '' || $header != $this->appkey){
+            if ($header == '' || $header != $this->appkey) {
                 //return abort(404);
                 $response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
                 return $response;
@@ -33,7 +34,7 @@ class AccCustomerController extends Controller
             //return response()->json($data);
             $response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $data );
             return $response;
-        } catch(\Illuminate\Database\QueryException $ex){ 
+        } catch(\Illuminate\Database\QueryException $ex) { 
             //dd($ex->getMessage()); 
             $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
             return $response;

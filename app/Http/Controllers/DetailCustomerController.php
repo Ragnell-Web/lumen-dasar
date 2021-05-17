@@ -53,7 +53,7 @@ class DetailCustomerController extends Controller
                     'customer.taxrate',
                     'customer.custcode',
                     'customer.contact',
-                    'customer.do_addr1',
+                    'customer.do_addr1'
                 )
                 ->where('customer.id', $request->input('id'))
                 ->orderBy('invoice')
