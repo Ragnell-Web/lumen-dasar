@@ -42,8 +42,10 @@ class AccCustomerInvoiceController extends Controller
                 //     'acc_customer_invoice.invoice', 
                 //     'acc_customer_invoice.inv_type', 
                 //     'acc_customer_invoice.ref_no', 
-                //     'acc_customer_invoice.period',  
+                //     'acc_customer_invoice.period', 
+                //     'acc_customer_invoicce.written',
                 //     'customer.company',
+                //     'customer.custcode',
                 //     'customer.contact',
                 //     'customer.do_addr1',
                 //     'customer.do_addr2'
@@ -53,7 +55,7 @@ class AccCustomerInvoiceController extends Controller
                 // ->get();
 
                 $data = DB::select("
-                    SELECT customer.id, aci.invoice, aci.custcode, aci.inv_type, aci.ref_no, customer.company, customer.contact, customer.do_addr1, customer.do_addr2
+                    SELECT customer.id, aci.invoice, customer.custcode, aci.inv_type, aci.ref_no, customer.company, customer.contact, customer.do_addr1, customer.do_addr2
                 FROM customer
                 INNER JOIN acc_customer_invoice AS aci
                 ON customer.id = aci.id

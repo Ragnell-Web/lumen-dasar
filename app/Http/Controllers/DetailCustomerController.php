@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccCustomerInvoice;
 use Illuminate\Http\Request;
 use App\Models\DetailCustomer;
+use Illuminate\Support\Facades\DB;
 
 class DetailCustomerController extends Controller
 {
@@ -32,7 +34,31 @@ class DetailCustomerController extends Controller
 
     			// $data = DetailCustomer::find($request->input('id'));
 
-    			$data = DetailCustomer::where('id', $request->input('id'))->get();
+    			$data = DB::table('customer')
+                ->join('acc_customer_invoice', 'customer.id', '=', 'acc_customer_invoice.id')
+                ->select(
+                    'customer.id',
+                    'acc_customer_invoice.invoice', 
+                    'acc_customer_invoice.inv_type', 
+                    'acc_customer_invoice.ref_no', 
+                    'acc_customer_invoice.period', 
+                    'acc_customer_invoice.written',
+                    'acc_customer_invoice.address1',
+                    'acc_customer_invoice.address3',
+                    'acc_customer_invoice.valas',
+                    'acc_customer_invoice.rate',
+                    'acc_customer_invoice.due',
+                    'acc_customer_invoice.glar',
+                    'customer.company',
+                    'customer.taxrate',
+                    'customer.custcode',
+                    'customer.contact',
+                    'customer.do_addr1',
+                )
+                ->where('customer.id', $request->input('id'))
+                ->orderBy('invoice')
+                ->limit(100)
+                ->get();
 
     			$response = array("error" => false, "errmsg" => "Data Ditampilkan", "code" => 200, "data" => $data );
 
