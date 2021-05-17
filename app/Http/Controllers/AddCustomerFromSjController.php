@@ -59,6 +59,7 @@ class AddCustomerFromSjController extends Controller
                     'entry_so_tbl.total_amount'
                 )
                 ->where('entry_so_tbl.cust_id', $request->input('cust_id'))
+                ->limit(105)
                 ->get();
 
     			$response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $data );
