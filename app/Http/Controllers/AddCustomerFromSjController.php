@@ -31,20 +31,35 @@ class AddCustomerFromSjController extends Controller
                 	return $response;
     			}
 
-    			$data = DB::select("
-    				SELECT 
-						entry_do_tbl.cust_id,
-						entry_do_tbl.do_no,
-						entry_do_tbl.dn_no,
-						entry_do_tbl.po_no,
-						entry_do_tbl.ref_no,
-						entry_do_tbl.sso_no,
-						entry_do_tbl.delivery_date,
-						entry_so_tbl.total_amount
-					FROM entry_do_tbl
-					INNER JOIN entry_so_tbl
-					ON entry_do_tbl.cust_id = entry_so_tbl.cust_id
-    				");
+    	// 		$data = DB::select("
+    	// 			SELECT 
+					// 	entry_do_tbl.cust_id,
+					// 	entry_do_tbl.do_no,
+					// 	entry_do_tbl.dn_no,
+					// 	entry_do_tbl.po_no,
+					// 	entry_do_tbl.ref_no,
+					// 	entry_do_tbl.sso_no,
+					// 	entry_do_tbl.delivery_date,
+					// 	entry_so_tbl.total_amount
+					// FROM entry_do_tbl
+					// INNER JOIN entry_so_tbl
+					// ON entry_do_tbl.cust_id = entry_so_tbl.cust_id
+    	// 			");
+
+                $data = DB::table('entry_do_tbl')
+                ->join('entry_so_tbl', 'entry_do_tbl.cust_id', '=', 'entry_so_tbl.cust_id')
+                ->select(
+                    'entry_do_tbl.cust_id',
+                    'entry_do_tbl.do_no', 
+                    'entry_do_tbl.dn_no', 
+                    'entry_do_tbl.po_no', 
+                    'entry_do_tbl.ref_no', 
+                    'entry_do_tbl.sso_no',
+                    'entry_do_tbl.delivery_date',
+                    'entry_so_tbl.total_amount'
+                )
+                ->where('entry_so_tbl.cust_id', $request->input('cust_id'))
+                ->get();
 
     			$response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $data );
             	return $response;
