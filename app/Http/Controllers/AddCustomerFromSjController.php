@@ -46,26 +46,27 @@ class AddCustomerFromSjController extends Controller
 					// ON entry_do_tbl.cust_id = entry_so_tbl.cust_id
     	// 			");
 
-                // $data = DB::table('do_hdr')
-                // ->select(
-                //     'do_hdr.custcode',
-                //     'do_hdr.do_no', 
-                //     'do_hdr.dn_no', 
-                //     'do_hdr.po_no', 
-                //     'do_hdr.ref_no', 
-                //     'do_hdr.sso_no',
-                //     'do_hdr.written',
-                //     'do_hdr.tot_amt'
-                // )
-                // ->where('do_hdr.custcode', $request->input('custcode'))
-                // ->groupBy('do_hdr.do_no')
-                // ->limit(106)
-                // ->get();
+                $data = DB::table('do_hdr')
+                ->select(
+                    'do_hdr.custcode',
+                    'do_hdr.do_no', 
+                    'do_hdr.dn_no', 
+                    'do_hdr.po_no', 
+                    'do_hdr.ref_no', 
+                    'do_hdr.sso_no',
+                    'do_hdr.written',
+                    'do_hdr.tot_amt'
+                )
+                ->where('do_hdr.custcode', $request->input('custcode'))
+                ->groupBy('do_hdr.do_no')
+                ->limit(106)
+                ->get();
 
-                $data = DB::select("
-                    SELECT custcode, do_no, dn_no, po_no, ref_no, sso_no, written, tot_amt
-                FROM do_hdr
-                GROUP BY do_no");
+                // $data = DB::select("
+                //     SELECT custcode, do_no, dn_no, po_no, ref_no, sso_no, written, tot_amt
+                // FROM do_hdr
+                // WHERE custcode = ''
+                // GROUP BY do_no");
 
 
     			$response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $data );
