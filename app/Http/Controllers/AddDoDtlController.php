@@ -43,7 +43,15 @@ class AddDoDtlController extends Controller
                     'do_dtl.itemcode',
                     'do_dtl.part_no'
                 )
-                ->where('do_dtl.do_no', $request->input('do_no'))
+                ->where(function ( $query) use ($request)
+                {
+                    $query->where('do_dtl.do_no', $request->input('do_no'))
+                            ->orWhere('do_dtl.do_no', $request->input('do_no2'))
+                            ->orWhere('do_dtl.do_no', $request->input('do_no3'))
+                            ->orWhere('do_dtl.do_no', $request->input('do_no4'))
+                            ->orWhere('do_dtl.do_no', $request->input('do_no5'))
+                            ;
+                })
                 ->limit(106)
                 ->get();
 

@@ -33,6 +33,6 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
 
    $router->get('addcustomerfromsjlist','AddCustomerFromSjController@index');
 
-   $router->get('adddodtllist','AddDoDtlController@index');   
+   $router->get('adddodtllist','AddDoDtlController@index');
 
 });

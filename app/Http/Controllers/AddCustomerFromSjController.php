@@ -32,7 +32,7 @@ class AddCustomerFromSjController extends Controller
     			}
 
     	// 		$data = DB::select("
-    	// 			SELECT 
+    	// 			SELECT
 					// 	entry_do_tbl.cust_id,
 					// 	entry_do_tbl.do_no,
 					// 	entry_do_tbl.dn_no,
@@ -49,16 +49,16 @@ class AddCustomerFromSjController extends Controller
                 $data = DB::table('do_hdr')
                 ->select(
                     'do_hdr.custcode',
-                    'do_hdr.do_no', 
-                    'do_hdr.dn_no', 
-                    'do_hdr.po_no', 
-                    'do_hdr.ref_no', 
+                    'do_hdr.do_no',
+                    'do_hdr.dn_no',
+                    'do_hdr.po_no',
+                    'do_hdr.ref_no',
                     'do_hdr.sso_no',
                     'do_hdr.written',
                     'do_hdr.tot_amt'
                 )
                 ->where('do_hdr.custcode', $request->input('custcode'))
-                ->groupBy('do_hdr.do_no')
+                // ->groupBy('do_hdr.do_no')
                 ->limit(106)
                 ->get();
 
