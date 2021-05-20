@@ -43,7 +43,6 @@ class AddDoDtlController extends Controller
                     'do_dtl.itemcode',
                     'do_dtl.part_no'
                 )
-<<<<<<< Updated upstream
                 ->where(function ( $query) use ($request)
                 {
                     $query->where('do_dtl.do_no', $request->input('do_no'))
@@ -53,10 +52,8 @@ class AddDoDtlController extends Controller
                             ->orWhere('do_dtl.do_no', $request->input('do_no5'))
                             ;
                 })
-=======
                 ->where('do_dtl.do_no', $request->input('do_no'))
                 ->orWhere('part_no', '55107-BZ480')
->>>>>>> Stashed changes
                 ->limit(106)
                 ->get();
 
