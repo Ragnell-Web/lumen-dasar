@@ -89,11 +89,12 @@ class AddCustomerFromSjController extends Controller
                     return $response;
                 }
 
-                
+            $data_do_hdr = DeleteDoHdr::limit(100)->get();    
+
             $data = DeleteDoHdr::Where('do_no', $request->input('do_no'))->delete();;
 
                 
-                $response = array("error" => false, "errmsg" => "Data Berhasil Dihapus", "code" => 200, "data" => $data );
+                $response = array("error" => false, "errmsg" => "Data Berhasil Dihapus", "code" => 200, "data" => $data_do_hdr );
 
                 return $response;
 
