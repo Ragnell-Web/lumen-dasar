@@ -39,10 +39,10 @@ class DetailCustomerController extends Controller
                 ->join('acc_customer_invoice', 'customer.id', '=', 'acc_customer_invoice.id')
                 ->select(
                     'customer.id',
-                    'acc_customer_invoice.invoice', 
-                    'acc_customer_invoice.inv_type', 
-                    'acc_customer_invoice.ref_no', 
-                    'acc_customer_invoice.period', 
+                    'acc_customer_invoice.invoice',
+                    'acc_customer_invoice.inv_type',
+                    'acc_customer_invoice.ref_no',
+                    'acc_customer_invoice.period',
                     'acc_customer_invoice.written',
                     'acc_customer_invoice.address1',
                     'acc_customer_invoice.address3',
@@ -54,7 +54,7 @@ class DetailCustomerController extends Controller
                     'customer.taxrate',
                     'customer.custcode',
                     'customer.contact',
-                    'customer.do_addr1'
+                    'customer.source'
                 )
                 ->where('customer.id', $request->input('id'))
                 ->orderBy('invoice')

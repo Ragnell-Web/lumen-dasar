@@ -57,5 +57,5 @@ class UpdateInvoiceController extends Controller
             return $response;
         }
     }
-    
+
 }

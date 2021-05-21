@@ -52,8 +52,6 @@ class AddDoDtlController extends Controller
                             ->orWhere('do_dtl.do_no', $request->input('do_no5'))
                             ;
                 })
-                ->where('do_dtl.do_no', $request->input('do_no'))
-                ->orWhere('part_no', '55107-BZ480')
                 ->limit(106)
                 ->get();
 

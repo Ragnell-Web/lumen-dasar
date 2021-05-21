@@ -75,5 +75,5 @@ class UpdateCustomerController extends Controller
             return $response;
         }
     }
-    
+
 }
