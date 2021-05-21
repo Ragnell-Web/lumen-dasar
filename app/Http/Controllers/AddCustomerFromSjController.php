@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AddCustomerFromSj;
+use App\Models\DeleteDoHdr;
 use DB;
 
 class AddCustomerFromSjController extends Controller
@@ -88,12 +89,11 @@ class AddCustomerFromSjController extends Controller
                     return $response;
                 }
 
-                $hapus = AddCustomerFromSj::find($request->input('id'));
+                
+            $data = DeleteDoHdr::Where('do_no', $request->input('do_no'))->delete();;
 
-                if ($hapus != null)
-                    $hapus->delete();
-
-                $response = array("error" => false, "errmsg" => "Data Berhasil Dihapus", "code" => 200, "data" => $hapus );
+                
+                $response = array("error" => false, "errmsg" => "Data Berhasil Dihapus", "code" => 200, "data" => $data );
 
                 return $response;
 
