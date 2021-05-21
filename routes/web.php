@@ -36,6 +36,7 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
    $router->get('datasuratjalanlist','DataSuratJalanController@index');
 
    $router->get('addcustomerfromsjlist','AddCustomerFromSjController@index');
+   $router->delete('addcustomerfromsjdelete','AddCustomerFromSjController@destroy');
 
    $router->get('adddodtllist','AddDoDtlController@index');
 

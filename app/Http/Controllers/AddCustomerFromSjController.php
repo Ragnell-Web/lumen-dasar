@@ -78,4 +78,29 @@ class AddCustomerFromSjController extends Controller
     	}
     }
 
+    public function destroy(Request $request)
+    {
+        try {
+                $header = $request->header('Authorization');
+
+                if ($header == '' || $header != $this->appkey) {
+                    $response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
+                    return $response;
+                }
+
+                $hapus = AddCustomerFromSj::find($request->input('id'));
+
+                if ($hapus != null)
+                    $hapus->delete();
+
+                $response = array("error" => false, "errmsg" => "Data Berhasil Dihapus", "code" => 200, "data" => $hapus );
+
+                return $response;
+
+        } catch(\Illuminate\Database\QueryException $ex) {
+            $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
+            return $response;
+        }  
+    }
+
 }
