@@ -26,6 +26,9 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
    $router->delete('acccustomerinvoicedelete','AccCustomerInvoiceController@destroy');
 
    $router->get('customerlist','CustomerListController@index');
+
+   $router->get('customeredit', 'CustomerWhereIdController@show');
+
    $router->get('detailcustomeredit','DetailCustomerController@show');
    $router->put('detailcustomerupdate','UpdateCustomerController@updateTabelCustomer');
    $router->put('detailinvoiceupdate','UpdateInvoiceController@updateTabelInvoice');
@@ -35,7 +38,7 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
    $router->get('adddodtllist','AddDoDtlController@index');
 
 
-   
+
    $router->get('ttfentrylist','TtfEntryController@index');
 
 
