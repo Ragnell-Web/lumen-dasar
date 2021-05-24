@@ -29,9 +29,9 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
 
    $router->get('detailcustomeredit','DetailCustomerController@show');
 
-   $router->post('detailcustomerupdate','UpdateCustomerController@updateTabelCustomer');
+   $router->put('detailcustomerupdate','UpdateCustomerController@updateTabelCustomer');
 
-   $router->post('detailinvoiceupdate','UpdateInvoiceController@updateTabelInvoice');
+   $router->put('detailinvoiceupdate','UpdateInvoiceController@updateTabelInvoice');
 
    $router->get('datasuratjalanlist','DataSuratJalanController@index');
 
