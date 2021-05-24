@@ -25,6 +25,9 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
    $router->put('acccustomerinvoiceupdate','AccCustomerInvoiceController@update');
    $router->delete('acccustomerinvoicedelete','AccCustomerInvoiceController@destroy');
 
+   
+   $router->get('ttfentrylist','TtfEntryController@index');   
+
    $router->get('customerlist','CustomerListController@index');
 
    $router->get('detailcustomeredit','DetailCustomerController@show');
