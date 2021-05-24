@@ -30,6 +30,8 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
 
    $router->get('customerlist','CustomerListController@index');
 
+   $router->get('customeredit', 'CustomerWhereIdController@show');
+
    $router->get('detailcustomeredit','DetailCustomerController@show');
 
    $router->post('detailcustomerupdate','UpdateCustomerController@updateTabelCustomer');
