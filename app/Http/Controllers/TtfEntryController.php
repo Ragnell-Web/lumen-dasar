@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TtfEntry;
+use App\Models\DataTtfArl;
 use DB;
 
 class TtfEntryController extends Controller
@@ -45,6 +46,39 @@ class TtfEntryController extends Controller
     		$response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
             return $response;
     	}
+    }
+
+    public function create(Request $request)
+    {
+        try {
+                $header = $request->header('Authorization');
+
+                if ($header == '' || $header != $this->appkey) {
+                    $response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
+                    return $response;
+                }
+
+                $data = new DataTtfArl;
+                $data->ttf_no = $request->input('ttf_no');
+                $data->received = $request->input('received');
+                $data->valas = $request->input('valas');          
+                $data->invoice = $request->input('invoice');
+                $data->ref_no = $request->input('ref_no');
+                $data->tax_no = $request->input('tax_no');
+                $data->kw_no = $request->input('kw_no');
+                $data->inv_date = $request->input('inv_date');
+                $data->inv_due = $request->input('inv_due');
+                $data->amount_tot = $request->input('amount_tot');
+                $data->custcode = $request->input('custcode');
+                $data->save();
+
+                $response = array("error" => false, "errmsg" => "Data Berhasil Ditambah", "code" => 200, "data" => $data );
+                return $response;
+
+        } catch(\Illuminate\Database\QueryException $ex) {
+            $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
+            return $response;
+        }
     }
 
 }
