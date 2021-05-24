@@ -25,22 +25,19 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
    $router->put('acccustomerinvoiceupdate','AccCustomerInvoiceController@update');
    $router->delete('acccustomerinvoicedelete','AccCustomerInvoiceController@destroy');
 
-   
-   $router->get('ttfentrylist','TtfEntryController@index');   
-
    $router->get('customerlist','CustomerListController@index');
-
    $router->get('detailcustomeredit','DetailCustomerController@show');
-
    $router->put('detailcustomerupdate','UpdateCustomerController@updateTabelCustomer');
-
    $router->put('detailinvoiceupdate','UpdateInvoiceController@updateTabelInvoice');
-
    $router->get('datasuratjalanlist','DataSuratJalanController@index');
-
    $router->get('addcustomerfromsjlist','AddCustomerFromSjController@index');
    $router->delete('addcustomerfromsjdelete','AddCustomerFromSjController@destroy');
-
    $router->get('adddodtllist','AddDoDtlController@index');
+
+
+   
+   $router->get('ttfentrylist','TtfEntryController@index');
+
+
 
 });
