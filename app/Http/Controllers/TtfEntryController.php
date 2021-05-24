@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TtfEntry;
+use DB;
 
 class TtfEntryController extends Controller
 {
@@ -29,9 +30,14 @@ class TtfEntryController extends Controller
     				$response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
                 	return $response;
     			}
+    			// $data = TtfEntry::all();
 
-    			$data = TtfEntry::all();
-
+                $data = DB::select('
+                        SELECT * FROM ttf_arh
+                        ORDER BY ttf_arh.ttf_no
+                        DESC LIMIT 1
+                    '); 
+                 
     			$response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $data );
             	return $response;
 
@@ -40,4 +46,5 @@ class TtfEntryController extends Controller
             return $response;
     	}
     }
+
 }
