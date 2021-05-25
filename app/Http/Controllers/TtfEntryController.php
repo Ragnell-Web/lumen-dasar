@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TtfEntry;
 use App\Models\DataTtfArl;
+use App\Models\TtfArh;
 use DB;
 
 class TtfEntryController extends Controller
@@ -78,6 +79,36 @@ class TtfEntryController extends Controller
                 //         ]);
 
                 $response = array("error" => false, "errmsg" => "Data Berhasil Ditambah", "code" => 200, "data" => $data );
+                return $response;
+
+        } catch(\Illuminate\Database\QueryException $ex) {
+            $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
+            return $response;
+        }
+    }
+
+    public function update(Request $request)
+    {
+        try {
+                $header = $request->header('Authorization');
+
+                if ($header == '' || $header != $this->appkey) {
+                    $response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
+                    return $response;
+                }
+
+                $data = TtfArh::find($request->input('id'));
+
+                $data->ref_no = $request->input('ref_no');
+                $data->written = $request->input('written');
+                $data->custcode = $request->input('custcode');
+                $data->valas = $request->input('valas');
+                $data->remark = $request->input('remark');
+                $data->total_amt = $request->input('total_amt');
+                $data->save();
+
+                $response = array("error" => false, "errmsg" => "Data Berhasil Diperbaharui", "code" => 200, "data" => $data );
+
                 return $response;
 
         } catch(\Illuminate\Database\QueryException $ex) {
