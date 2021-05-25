@@ -29,6 +29,8 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
    $router->get('ttfentrylist','TtfEntryController@index');
    $router->post('ttfentrystore', 'TtfEntryController@create');   
 
+   $router->post('ttfarhstore', 'TtfArhController@create');
+
    $router->get('customerlist','CustomerListController@index');
 
    $router->get('customeredit', 'CustomerWhereIdController@show');

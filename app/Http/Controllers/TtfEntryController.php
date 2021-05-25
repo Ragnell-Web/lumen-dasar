@@ -72,6 +72,11 @@ class TtfEntryController extends Controller
                 $data->custcode = $request->input('custcode');
                 $data->save();
 
+                // $data = DB::table('ttf_arl')->insert([
+                //             ['kw_no' => $request->input('kw_no'), 'invoice' => $request->input('invoice')],
+                //             ['kw_no' => $request->input('kw_no2'), 'invoice' => $request->input('invoice2')]
+                //         ]);
+
                 $response = array("error" => false, "errmsg" => "Data Berhasil Ditambah", "code" => 200, "data" => $data );
                 return $response;
 
