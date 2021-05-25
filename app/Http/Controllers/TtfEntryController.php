@@ -97,17 +97,50 @@ class TtfEntryController extends Controller
                     return $response;
                 }
 
-                $data = TtfArh::Where('ttf_no', $request->input('ttf_no'))->first();
+                // $data = TtfArh::Where('ttf_no', $request->input('ttf_no'))->first();
+                $data =  TtfArh::where('ttf_no', $request->input('ttf_no'))->update($request->all());
 
-                $data->ref_no = $request->input('ref_no');
-                $data->written = $request->input('written');
-                $data->custcode = $request->input('custcode');
-                $data->valas = $request->input('valas');
-                $data->remark = $request->input('remark');
-                $data->total_amt = $request->input('total_amt');
-                $data->save();
+                // $data->ref_no = $request->input('ref_no');
+                // $data->written = $request->input('written');
+                // $data->custcode = $request->input('custcode');
+                // $data->valas = $request->input('valas');
+                // $data->remark = $request->input('remark');
+                // $data->total_amt = $request->input('total_amt');
+                // $data->save();
 
-                $response = array("error" => false, "errmsg" => "Data Berhasil Diperbaharui", "code" => 200, "data" => $data );
+                $response = array("error" => false, "errmsg" => "Data Berhasil Diperbaharui", "code" => 200, "data" => TtfArh::where('ttf_no', $request->input('ttf_no'))->first());
+
+                return $response;
+
+        } catch(\Illuminate\Database\QueryException $ex) {
+            $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
+            return $response;
+        }
+    }
+
+    public function updateTtfArl(Request $request)
+    {
+        try {
+                $header = $request->header('Authorization');
+
+                if ($header == '' || $header != $this->appkey) {
+                    $response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
+                    return $response;
+                }
+
+                // $data = DataTtfArl::Where('ttf_no', $request->input('ttf_no'))->first();
+                $data =  DataTtfArl::where('ttf_no', $request->input('ttf_no'))->update($request->all());
+
+
+                // $data->ref_no = $request->input('ref_no');
+                // $data->written = $request->input('written');
+                // $data->custcode = $request->input('custcode');
+                // $data->valas = $request->input('valas');
+                // $data->remark = $request->input('remark');
+                // $data->total_amt = $request->input('total_amt');
+                // $data->save();
+
+                $response = array("error" => false, "errmsg" => "Data Berhasil Diperbaharui", "code" => 200, "data" => DataTtfArl::where('ttf_no', $request->input('ttf_no'))->first() );
 
                 return $response;
 
