@@ -87,7 +87,7 @@ class TtfEntryController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function updateTtfArh(Request $request)
     {
         try {
                 $header = $request->header('Authorization');
@@ -97,7 +97,7 @@ class TtfEntryController extends Controller
                     return $response;
                 }
 
-                $data = TtfArh::find($request->input('id'));
+                $data = TtfArh::Where('ttf_no', $request->input('ttf_no'))->first();
 
                 $data->ref_no = $request->input('ref_no');
                 $data->written = $request->input('written');
