@@ -28,7 +28,7 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
    
    $router->get('ttfentrylist','TtfEntryController@index');
    $router->post('ttfentrystore', 'TtfEntryController@create');   
-   $router->put('ttfarhupdate', 'TtfEntryController@update');
+   $router->put('ttfarhupdate', 'TtfEntryController@updateTtfArh');
 
    $router->post('ttfarhstore', 'TtfArhController@create');
 
