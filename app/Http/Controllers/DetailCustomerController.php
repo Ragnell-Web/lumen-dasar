@@ -123,5 +123,32 @@ class DetailCustomerController extends Controller
         }
     }
 
+    public function create(Request $request)
+    {
+        try {
+                $header = $request->header('Authorization');
+
+                if ($header == '' || $header != $this->appkey) {
+                    $response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
+                    return $response;
+                }
+
+                $data = new TabelCustomer;
+
+                $data->company = $request->input('company');           
+                $data->custcode = $request->input('custcode');
+                $data->contact = $request->input('contact');
+                $data->source = $request->input('source');
+                $data->taxrate = $request->input('taxrate');
+                $data->save();
+
+                $response = array("error" => false, "errmsg" => "Data Berhasil Didaftarkan", "code" => 200, "data" => TabelCustomer::all() );
+
+                return $response;
+        } catch(\Illuminate\Database\QueryException $ex) {
+            $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
+            return $response;
+        }
+    }
 
 }
