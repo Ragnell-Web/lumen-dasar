@@ -37,6 +37,7 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
 
    $router->get('customeredit', 'CustomerWhereIdController@show');
 
+   $router->post('detailcustomerstore','DetailCustomerController@create');
    $router->get('detailcustomeredit','DetailCustomerController@show');
 
    $router->post('detailcustomerupdate','UpdateCustomerController@updateTabelCustomer');
