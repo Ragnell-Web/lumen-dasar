@@ -22,6 +22,7 @@ $router->group(['prefix'=>'api/v1'],function () use ($router)
    $router->get('acccustomerinvoicelist','AccCustomerInvoiceController@index');
    $router->post('acccustomerinvoicestore','AccCustomerInvoiceController@create');
    $router->get('acccustomerinvoiceedit','AccCustomerInvoiceController@show');
+   $router->get('acccustomerinvoicefilter','AccCustomerInvoiceController@showCustCode');
    $router->put('acccustomerinvoiceupdate','AccCustomerInvoiceController@update');
    $router->delete('acccustomerinvoicedelete','AccCustomerInvoiceController@destroy');
 
