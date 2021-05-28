@@ -204,6 +204,42 @@ class AccCustomerInvoiceController extends Controller
         }
     }
 
+    public function showCustCode(Request $request)
+    {
+        try {
+                $header = $request->header('Authorization');
+
+                if ($header == '' || $header != $this->appkey) {
+                    $response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
+                    return $response;
+                }
+
+                // $data = AccCustomerInvoice::Where('custcode', $request->input('custcode'))->first();
+                // $data = DB::select("
+                //         SELECT *
+                //         FROM acc_customer_invoice
+                //         WHERE custcode = ($request->input('custcode')) 
+                //     ");   
+
+                $data = DB::table('acc_customer_invoice')
+                ->select(
+                    'acc_customer_invoice.invoice'
+                )
+                ->where('acc_customer_invoice.custcode', $request->input('custcode'))
+                // ->groupBy('do_hdr.do_no')
+                
+                ->get();
+                // $data = AccCustomerInvoice::all();    
+
+                $response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $data );
+
+                return $response;
+        } catch(\Illuminate\Database\QueryException $ex) {
+            $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
+            return $response;
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
