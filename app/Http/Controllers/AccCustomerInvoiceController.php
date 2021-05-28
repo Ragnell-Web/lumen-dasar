@@ -24,7 +24,7 @@ class AccCustomerInvoiceController extends Controller
 
     public function index(Request $request)
     {
-        try { 
+        try {
                 $header = $request->header('Authorization');
 
                 if ($header == '' || $header != $this->appkey) {
@@ -32,17 +32,17 @@ class AccCustomerInvoiceController extends Controller
                     $response = array("error" => true, "errmsg" => "you have no authorized", "code" => 400, "data" => null );
                     return $response;
                 }
-                
+
                 // $data = AccCustomerInvoice::all();
 
                 // $data = DB::table('customer')
                 // ->join('acc_customer_invoice', 'customer.id', '=', 'acc_customer_invoice.id')
                 // ->select(
                 //     'customer.id',
-                //     'acc_customer_invoice.invoice', 
-                //     'acc_customer_invoice.inv_type', 
-                //     'acc_customer_invoice.ref_no', 
-                //     'acc_customer_invoice.period', 
+                //     'acc_customer_invoice.invoice',
+                //     'acc_customer_invoice.inv_type',
+                //     'acc_customer_invoice.ref_no',
+                //     'acc_customer_invoice.period',
                 //     'acc_customer_invoicce.written',
                 //     'customer.company',
                 //     'customer.custcode',
@@ -65,10 +65,10 @@ class AccCustomerInvoiceController extends Controller
                 // ->join('acc_customer_invoice', 'customer.id', '=', 'acc_customer_invoice.id')
                 // ->select(
                 //     'customer.id',
-                //     'acc_customer_invoice.invoice', 
-                //     'acc_customer_invoice.inv_type', 
-                //     'acc_customer_invoice.ref_no', 
-                //     'acc_customer_invoice.period',  
+                //     'acc_customer_invoice.invoice',
+                //     'acc_customer_invoice.inv_type',
+                //     'acc_customer_invoice.ref_no',
+                //     'acc_customer_invoice.period',
                 //     'customer.company',
                 //     'customer.contact',
                 //     'customer.do_addr1',
@@ -87,8 +87,8 @@ class AccCustomerInvoiceController extends Controller
                 $response = array("error" => false, "errmsg" => "Data Ditampilkan", "code" => 200, "data" => $data );
 
                 return $response;
-        } catch(\Illuminate\Database\QueryException $ex) { 
-            //dd($ex->getMessage()); 
+        } catch(\Illuminate\Database\QueryException $ex) {
+            //dd($ex->getMessage());
             $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
             return $response;
             // Note any method of class PDOException can be called on $ex.
@@ -168,7 +168,7 @@ class AccCustomerInvoiceController extends Controller
 
                 $data =  AccCustomerInvoice::insert($request->all());
 
-                $response = array("error" => false, "errmsg" => "Data Berhasil Didaftarkan", "code" => 200, "data" => $data );
+                $response = array("error" => false, "errmsg" => "Data Berhasil Didaftarkan", "code" => 200, "data" => AccCustomerInvoice::where('invoice',$request->input('invoice'))->first() );
 
                 return $response;
         } catch(\Illuminate\Database\QueryException $ex) {
@@ -315,7 +315,7 @@ class AccCustomerInvoiceController extends Controller
         } catch(\Illuminate\Database\QueryException $ex) {
             $response = array("error" => true, "errmsg" => $ex->getMessage(), "code" => 412, "data" => null );
             return $response;
-        }  
+        }
     }
 
 }
