@@ -32,36 +32,39 @@ class AddCustomerFromSjController extends Controller
                 	return $response;
     			}
 
-    	// 		$data = DB::select("
-    	// 			SELECT
-					// 	entry_do_tbl.cust_id,
-					// 	entry_do_tbl.do_no,
-					// 	entry_do_tbl.dn_no,
-					// 	entry_do_tbl.po_no,
-					// 	entry_do_tbl.ref_no,
-					// 	entry_do_tbl.sso_no,
-					// 	entry_do_tbl.delivery_date,
-					// 	entry_so_tbl.total_amount
-					// FROM entry_do_tbl
-					// INNER JOIN entry_so_tbl
-					// ON entry_do_tbl.cust_id = entry_so_tbl.cust_id
-    	// 			");
 
-                $data = DB::table('do_hdr')
-                ->select(
-                    'do_hdr.custcode',
-                    'do_hdr.do_no',
-                    'do_hdr.dn_no',
-                    'do_hdr.po_no',
-                    'do_hdr.ref_no',
-                    'do_hdr.sso_no',
-                    'do_hdr.written',
-                    'do_hdr.tot_amt'
-                )
-                ->where('do_hdr.custcode', $request->input('custcode'))
-                // ->groupBy('do_hdr.do_no')
-                ->limit(106)
-                ->get();
+                // $data = DB::table('do_hdr')
+                // ->select(
+                //     'do_hdr.custcode',
+                //     'do_hdr.do_no',
+                //     'do_hdr.dn_no',
+                //     'do_hdr.po_no',
+                //     'do_hdr.ref_no',
+                //     'do_hdr.sso_no',
+                //     'do_hdr.written',
+                //     'do_hdr.tot_amt'
+                // )
+                // ->where('do_hdr.custcode', $request->input('custcode'))
+                // // ->groupBy('do_hdr.do_no')
+                // ->limit(106)
+                // ->get();
+                $data = DB::table('entry_do_tbl')
+                        ->leftJoin('cus_price','cus_price.itemcode','=','entry_do_tbl.item_code')
+                        ->where('cust_id',$request->input('cust_id'))
+                        ->groupBy('do_no')
+                        ->get();
+
+                // $a = $data[0]->do_no;
+                // $b = $dataInvoice[0]->invoice;
+                // if ($a == $b) {
+                //     $dataBaru = DB::table('entry_do_tbl')
+                //         ->leftJoin('cus_price','cus_price.itemcode','=','entry_do_tbl.item_code')
+                //         ->where('cust_id',$request->input('cust_id'))
+                //         ->groupBy('do_no')
+                //         ->get();
+                // }
+
+
 
                 // $data = DB::select("
                 //     SELECT custcode, do_no, dn_no, po_no, ref_no, sso_no, written, tot_amt
