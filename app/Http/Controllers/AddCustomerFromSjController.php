@@ -48,11 +48,11 @@ class AddCustomerFromSjController extends Controller
                 // // ->groupBy('do_hdr.do_no')
                 // ->limit(106)
                 // ->get();
-                $data = DB::table('entry_do_tbl')
-                        ->leftJoin('cus_price','cus_price.itemcode','=','entry_do_tbl.item_code')
-                        ->where('cust_id',$request->input('cust_id'))
-                        ->groupBy('do_no')
-                        ->get();
+                // $data = DB::table('entry_do_tbl')
+                //         ->leftJoin('cus_price','cus_price.itemcode','=','entry_do_tbl.item_code')
+                //         ->where('cust_id',$request->input('cust_id'))
+                //         ->groupBy('do_no')
+                //         ->get();
 
                 // $a = $data[0]->do_no;
                 // $b = $dataInvoice[0]->invoice;
@@ -64,13 +64,17 @@ class AddCustomerFromSjController extends Controller
                 //         ->get();
                 // }
 
+                $invoice = DB::select("SELECT invoice FROM acc_customer_invoice");
 
-
-                // $data = DB::select("
-                //     SELECT custcode, do_no, dn_no, po_no, ref_no, sso_no, written, tot_amt
-                // FROM do_hdr
-                // WHERE custcode = ''
-                // GROUP BY do_no");
+                $data = DB::select("
+                    SELECT DISTINCT 
+                    -- entry_do_tbl.do_no, acc_customer_invoice.invoice
+                    *
+                    FROM entry_do_tbl 
+                    JOIN acc_customer_invoice
+                    ON acc_customer_invoice.invoice = entry_do_tbl.do_no
+                    GROUP BY entry_do_tbl.do_no 
+                ");
 
 
     			$response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $data );
