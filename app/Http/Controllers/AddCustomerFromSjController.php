@@ -70,14 +70,31 @@ class AddCustomerFromSjController extends Controller
                 // WHERE custcode = ''
                 // GROUP BY do_no");
 
-                // $invoice = DB::select("SELECT invoice FROM acc_customer_invoice");
+                $invoice = DB::select("SELECT invoice FROM acc_customer_invoice");
 
+                $do_no = DB::select("SELECT do_no FROM entry_do_tbl");
                 // $data = DB::select("
                 //     SELECT *
                 //     FROM entry_do_tbl 
                 //     WHERE entry_do_tbl.do_no <= 21020004
                 //     GROUP BY do_no
                 // ");
+                $cust_id = DB::select("SELECT cust_id FROM entry_do_tbl");
+
+                $cek_msuk = DB::select("
+                     SELECT *
+                     FROM entry_do_tbl 
+                     WHERE entry_do_tbl.do_no <= 21020004
+                     GROUP BY do_no
+                 ");
+
+               // if( $invoice == $do_no ) {
+               //      echo $cek_msuk;
+               //  } else {
+               //      $result = implode(",", $cek_msuk);
+               //      echo ($cek_msuk);
+
+               //  }
 
                 $data = DB::table('entry_do_tbl')
                         ->leftJoin('cus_price','cus_price.itemcode','=','entry_do_tbl.item_code')
@@ -88,7 +105,7 @@ class AddCustomerFromSjController extends Controller
                         ->get();
 
 
-    			$response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $data );
+    			$response = array("error" => false, "errmsg" => "", "code" => 200, "data" => $cek_msuk );
             	return $response;
 
     	} catch(\Illuminate\Database\QueryException $ex) {
