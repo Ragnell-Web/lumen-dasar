@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TtfEntry;
 use App\Models\DataTtfArl;
 use App\Models\TtfArh;
 use DB;

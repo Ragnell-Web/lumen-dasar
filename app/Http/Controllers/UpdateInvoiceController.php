@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\AccCustomerInvoice;
 use Illuminate\Http\Request;
-use App\Models\DetailCustomer;
 use Illuminate\Support\Facades\DB;
 
 class UpdateInvoiceController extends Controller

@@ -31,7 +31,7 @@ class CustomerWhereIdController extends Controller
                		 return $response;
     			}
 
-    			$data = CustomerWhereId::Where('id', $request->input('id'))->get();
+    			$data = CustomerList::Where('id', $request->input('id'))->get();
 
     			$response = array("error" => false, "errmsg" => "Data Ditampilkan", "code" => 200, "data" => $data );
 

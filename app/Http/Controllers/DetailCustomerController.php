@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AccCustomerInvoice;
 use Illuminate\Http\Request;
-use App\Models\DetailCustomer;
-use App\Models\TabelCustomer;
+use App\Models\CustomerList;
 use Illuminate\Support\Facades\DB;
 
 class DetailCustomerController extends Controller
@@ -133,7 +132,7 @@ class DetailCustomerController extends Controller
                     return $response;
                 }
 
-                $data = new TabelCustomer;
+                $data = new CustomerList;
 
                 $data->company = $request->input('company');           
                 $data->custcode = $request->input('custcode');
@@ -142,7 +141,7 @@ class DetailCustomerController extends Controller
                 $data->taxrate = $request->input('taxrate');
                 $data->save();
 
-                $response = array("error" => false, "errmsg" => "Data Berhasil Didaftarkan", "code" => 200, "data" => TabelCustomer::all() );
+                $response = array("error" => false, "errmsg" => "Data Berhasil Didaftarkan", "code" => 200, "data" => CustomerList::all() );
 
                 return $response;
         } catch(\Illuminate\Database\QueryException $ex) {

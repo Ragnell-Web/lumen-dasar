@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DataSuratJalan;
 use DB;
 
 class DataSuratJalanController extends Controller

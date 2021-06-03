@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AccCustomerInvoice;
 use Illuminate\Http\Request;
-use App\Models\DetailCustomer;
-use App\Models\TabelCustomer;
+use App\Models\CustomerList;
 use Illuminate\Support\Facades\DB;
 
 class UpdateCustomerController extends Controller
@@ -37,7 +35,7 @@ class UpdateCustomerController extends Controller
                 // $data = TabelCustomer::Where('custcode', $request->input('custcode'))->put();
                 $custcode = $request->input('custcode');
 
-                 $data = TabelCustomer::where('custcode',"=",$custcode)->first();
+                 $data = CustomerList::where('custcode',"=",$custcode)->first();
 
                 $data->contact = $request->input('contact');
                 $data->source = $request->input('source');
